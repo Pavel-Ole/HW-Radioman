@@ -10,7 +10,7 @@ public class RadioTest {
     public void shouldNotSetSoundVolumeMoreMax() {
         Radio radio = new Radio();
 
-        radio.setSoundVolume(11);
+        radio.setSoundVolume(101);
 
         int expected = 0;
         int actual = radio.getSoundVolume();
@@ -36,10 +36,10 @@ public class RadioTest {
     public void shouldIncreaseSoundVolume() {
         Radio radio = new Radio();
 
-        radio.setSoundVolume(7);
+        radio.setSoundVolume(79);
         radio.IncreaseSoundVolume();
 
-        int expected = 8;
+        int expected = 80;
         int actual = radio.getSoundVolume();
 
         Assertions.assertEquals(expected, actual);
@@ -50,10 +50,10 @@ public class RadioTest {
     public void shouldDecreaseSoundVolume() {
         Radio radio = new Radio();
 
-        radio.setSoundVolume(7);
+        radio.setSoundVolume(70);
         radio.decreaseSoundVolume();
 
-        int expected = 6;
+        int expected = 69;
         int actual = radio.getSoundVolume();
 
         Assertions.assertEquals(expected, actual);
@@ -64,10 +64,10 @@ public class RadioTest {
     public void shouldNotIncreaseSoundVolumeAboveMax() {
         Radio radio = new Radio();
 
-        radio.setSoundVolume(10);
+        radio.setSoundVolume(100);
         radio.IncreaseSoundVolume();
 
-        int expected = 10;
+        int expected = 100;
         int actual = radio.getSoundVolume();
 
         Assertions.assertEquals(expected, actual);
@@ -228,6 +228,170 @@ public class RadioTest {
     @Test
     public void shouldSwitchPrevRadioStationWith1On0() {
         Radio radio = new Radio();
+
+        radio.setCurrentRadioStation(1);
+        radio.prevRadioStation();
+
+        int expected = 0;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    // Тест на увеличение количества записанных радиостанций:
+    @Test
+    public void increaseAmountRadioStation() {
+        Radio radio = new Radio(22);
+
+        radio.setCurrentRadioStation(21);
+
+        int expected = 21;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    // Тест на переключение радиостанций кнопкой "следующая" от 0 до 21:
+    @Test
+    public void shouldSwitchNextRadioStationDesiredAmount() {
+        Radio radio = new Radio(22);
+
+        radio.setCurrentRadioStation(8);
+        radio.nextRadioStation();
+
+        int expected = 9;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    // Тест на переключение радиостанций кнопкой "следующая" с 21 на 0:
+    @Test
+    public void shouldSwitchNextRadioStationDesiredAmountWith21On0() {
+        Radio radio = new Radio(22);
+
+        radio.setCurrentRadioStation(21);
+        radio.nextRadioStation();
+
+        int expected = 0;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    // Тест на переключение радиостанций кнопкой "предыдущая" от 0 до 21:
+    @Test
+    public void shouldSwitchPrevRadioStationDesiredAmount() {
+        Radio radio = new Radio(22);
+
+        radio.setCurrentRadioStation(11);
+        radio.prevRadioStation();
+
+        int expected = 10;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    // Тест на переключение радиостанций кнопкой "предыдущая" с 0 на 21:
+    @Test
+    public void shouldSwitchPrevRadioStationDesiredAmountWith0On21() {
+        Radio radio = new Radio(22);
+
+        radio.setCurrentRadioStation(0);
+        radio.prevRadioStation();
+
+        int expected = 21;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    // Тест на выбор радиостанции по указанию номера в пределах с 0 до 21:
+    @Test
+    public void shouldSetAnyRadioStationDesiredAmount() {
+        Radio radio = new Radio(22);
+
+        radio.setCurrentRadioStation(12);
+
+        int expected = 12;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    // Тест на ограничение радиостанции по указанию номера в пределах выше 21:
+    @Test
+    public void shouldNotSetRadioStationDesiredAmountMore21() {
+        Radio radio = new Radio(22);
+
+        radio.setCurrentRadioStation(22);
+
+        int expected = 0;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    // Тест на ограничение радиостанции по указанию номера в пределах ниже 0:
+    @Test
+    public void shouldNotSetRadioStationDesiredAmountLess0() {
+        Radio radio = new Radio(22);
+
+        radio.setCurrentRadioStation(-1);
+
+        int expected = 0;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    // Тест на переключение радиостанций кнопкой "следующая" с 20 на 21:
+    @Test
+    public void shouldSwitchNextRadioStationDesiredAmountWith20On21() {
+        Radio radio = new Radio(22);
+
+        radio.setCurrentRadioStation(20);
+        radio.nextRadioStation();
+
+        int expected = 21;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    // Тест на переключение радиостанций кнопкой "следующая" с 0 на 1:
+    @Test
+    public void shouldSwitchNextRadioStationDesiredAmountWith0On1() {
+        Radio radio = new Radio(22);
+
+        radio.setCurrentRadioStation(0);
+        radio.nextRadioStation();
+
+        int expected = 1;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    // Тест на переключение радиостанций кнопкой "предыдущая" с 21 на 20:
+    @Test
+    public void shouldSwitchPrevRadioStationDesiredAmountWith21On20() {
+        Radio radio = new Radio(22);
+
+        radio.setCurrentRadioStation(21);
+        radio.prevRadioStation();
+
+        int expected = 20;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    // Тест на переключение радиостанций кнопкой "предыдущая" с 1 на 0:
+    @Test
+    public void shouldSwitchPrevRadioStationDesiredAmountWith1On0() {
+        Radio radio = new Radio(22);
 
         radio.setCurrentRadioStation(1);
         radio.prevRadioStation();

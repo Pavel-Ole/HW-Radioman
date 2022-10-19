@@ -4,7 +4,17 @@ public class Radio {
 
     private int currentRadioStation;
     private int soundVolume;
+    private int amountRadioStation;
 
+    public Radio() {
+
+        this.amountRadioStation = 10;
+    }
+
+    public Radio (int amountRadioStation){
+
+        this.amountRadioStation = amountRadioStation;
+    }
 
     public int getCurrentRadioStation() {
 
@@ -21,7 +31,7 @@ public class Radio {
         if (newSoundVolume < 0) {
             return;
         }
-        if (newSoundVolume > 10) {
+        if (newSoundVolume > 100) {
             return;
         }
 
@@ -30,7 +40,7 @@ public class Radio {
 
     // Увеличение звука на 1:
     public void IncreaseSoundVolume() {
-        if (soundVolume < 10) {
+        if (soundVolume < 100) {
             soundVolume = soundVolume + 1;
         }
 
@@ -49,7 +59,7 @@ public class Radio {
         if (newCurrentRadioStation < 0) {
             return;
         }
-        if (newCurrentRadioStation > 9) {
+        if (newCurrentRadioStation > amountRadioStation - 1) {
             return;
         }
         currentRadioStation = newCurrentRadioStation;
@@ -57,7 +67,7 @@ public class Radio {
 
     // Переключение радиостанций кнопкой "слудующая":
     public int nextRadioStation() {
-        if (currentRadioStation < 9) {
+        if (currentRadioStation < amountRadioStation - 1) {
             return currentRadioStation = currentRadioStation + 1;
 
         } else {
@@ -73,7 +83,7 @@ public class Radio {
             return currentRadioStation = currentRadioStation - 1;
 
         } else {
-            return currentRadioStation = 9;
+            return currentRadioStation = amountRadioStation - 1;
         }
 
     }
